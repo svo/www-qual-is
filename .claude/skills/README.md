@@ -5,12 +5,14 @@ This directory contains custom Claude Code skills tailored to this project's str
 ## Installed Skills (Tier 1 - Highest Value)
 
 ### 1. Hexagonal Architecture Feature Scaffolder
+
 **Directory:** `hexagonal-architecture-scaffolder/`
 **Trigger phrases:** "create a new feature", "scaffold a feature", "add a new domain entity", "create a new use case"
 
 **Purpose:** Guides Claude through creating complete features across all hexagonal architecture layers (domain -> application -> infrastructure -> interface) with proper dependency injection, layer boundaries, and test coverage.
 
 **Key features:**
+
 - Step-by-step scaffolding across all layers
 - Enforces layer boundary rules (validated by dependency-cruiser)
 - Generates repository interfaces in domain, implementations in infrastructure
@@ -20,18 +22,21 @@ This directory contains custom Claude Code skills tailored to this project's str
 - References existing post feature as example
 
 **Supporting files:**
+
 - `references/existing-coconut-example.md` - Complete example from codebase
 - `references/layer-dependency-rules.md` - Import dependency rules
 
 ---
 
 ### 2. Test Generator with One-Behavior-Per-Test Rule
+
 **Directory:** `test-generator/`
 **Trigger phrases:** "generate tests", "create tests for", "write test cases", "add test coverage"
 
 **Purpose:** Generates tests following the project's one-behavior-per-test rule with proper naming (`it("should X when Y")`), Arrange-Act-Assert structure, and appropriate test doubles.
 
 **Key features:**
+
 - Enforces one behavior per test (critical project rule)
 - Generates descriptive test names using `describe`/`it` blocks
 - Creates Arrange-Act-Assert structure
@@ -40,17 +45,20 @@ This directory contains custom Claude Code skills tailored to this project's str
 - Includes examples of Vitest matchers, spying, and module mocking
 
 **Supporting files:**
+
 - `references/test-examples-from-codebase.md` - Actual test examples from project
 
 ---
 
 ### 3. Self-Documenting Code Refactorer
+
 **Directory:** `self-documenting-refactor/`
 **Trigger phrases:** "remove comments", "make code self-documenting", "refactor to eliminate comments", "improve code clarity"
 
 **Purpose:** Enforces the project's strict NO COMMENTS policy by helping refactor code to be self-explanatory through expressive naming instead of comments.
 
 **Key features:**
+
 - Identifies comments in code
 - Suggests refactoring strategies (extract to well-named function, expressive variables, boolean conditions, named constants)
 - Provides before/after examples
@@ -58,18 +66,21 @@ This directory contains custom Claude Code skills tailored to this project's str
 - Includes common refactoring patterns
 
 **Supporting files:**
+
 - `references/refactoring-examples-from-codebase.md` - Examples from the codebase
 - `scripts/find_comments.py` - Executable script to scan for comments in codebase
 
 ---
 
 ### 4. Test-Driven Development
+
 **Directory:** `test-driven-development/`
 **Trigger phrases:** "implement feature", "fix bug", "write code", "TDD", "red-green-refactor"
 
 **Purpose:** Enforces the TDD methodology with strict Red-Green-Refactor cycle. Ensures no production code is written without a failing test first.
 
 **Key features:**
+
 - Iron Law: No production code without failing test first
 - Red-Green-Refactor cycle enforcement
 - Common rationalizations and rebuttals
@@ -77,17 +88,20 @@ This directory contains custom Claude Code skills tailored to this project's str
 - Debugging integration guidance
 
 **Supporting files:**
+
 - `testing-anti-patterns.md` - Common testing pitfalls to avoid
 
 ---
 
 ### 5. Systematic Debugging
+
 **Directory:** `systematic-debugging/`
 **Trigger phrases:** "debug", "fix bug", "test failure", "unexpected behavior", "error", "not working"
 
 **Purpose:** Provides systematic debugging methodology. Ensures root cause investigation before attempting fixes.
 
 **Key features:**
+
 - Four-phase process (Root Cause -> Pattern Analysis -> Hypothesis -> Implementation)
 - Multi-component system diagnostics
 - Evidence gathering before fixes
@@ -95,6 +109,7 @@ This directory contains custom Claude Code skills tailored to this project's str
 - Red flag detection for premature fix attempts
 
 **Supporting files:**
+
 - `root-cause-tracing.md` - Backward tracing through call stack
 - `defense-in-depth.md` - Multi-layer validation patterns
 - `condition-based-waiting.md` - Replace timeouts with condition polling
@@ -102,12 +117,14 @@ This directory contains custom Claude Code skills tailored to this project's str
 ---
 
 ### 6. Verification Before Completion
+
 **Directory:** `verification-before-completion/`
 **Trigger phrases:** "done", "complete", "fixed", "passing", "commit", "create PR", "finished"
 
 **Purpose:** Requires running verification commands and confirming output before making any success claims. Evidence before assertions, always.
 
 **Key features:**
+
 - Gate function: Identify -> Run -> Read -> Verify -> Claim
 - Common failure patterns and what each claim requires
 - Rationalization prevention table
@@ -115,27 +132,44 @@ This directory contains custom Claude Code skills tailored to this project's str
 
 ---
 
+### 7. Sequential Thinking
+
+**Directory:** `sequential-thinking/`
+**Trigger phrases:** "think through", "break down", "analyze step by step", "reason about"
+
+**Purpose:** Works through complex problems in sequential steps with revision, branching, hypothesis generation, and verification, then reports a verified conclusion and the evidence behind it.
+
+---
+
 ## How Claude Code Uses Skills
 
 ### Automatic Invocation
+
 Claude Code automatically loads and applies skills when trigger phrases are detected in user requests. For example:
+
 - User: "Create a new user feature" -> Loads Hexagonal Architecture Scaffolder
 - User: "Generate tests for the PostService" -> Loads Test Generator
 - User: "This code has comments, make it clearer" -> Loads Self-Documenting Refactorer
 - User: "I need to debug this test failure" -> Loads Systematic Debugging
 - User: "Implement the login feature" -> Loads Test-Driven Development
+- User: "Think through the trade-offs of this approach" -> Loads Sequential Thinking
 
 ### Manual Invocation
+
 You can also explicitly invoke skills:
+
 - `/hexagonal-architecture-scaffolder` - Load architecture scaffolding guidance
 - `/test-generator` - Load test generation guidance
 - `/self-documenting-refactor` - Load code refactoring guidance
 - `/test-driven-development` - Load TDD methodology guidance
 - `/systematic-debugging` - Load debugging methodology guidance
 - `/verification-before-completion` - Load completion verification guidance
+- `/sequential-thinking` - Load step-by-step reasoning guidance
 
 ### Progressive Disclosure
+
 Skills use progressive disclosure:
+
 - Main `SKILL.md` contains core guidance (1,500-2,000 words)
 - `references/` directory contains detailed examples and patterns
 - `templates/` directory contains ready-to-use code templates
@@ -215,8 +249,9 @@ Future skills to consider:
 ## Verification
 
 Check all skills are present:
+
 ```bash
 ls -la .claude/skills/*/SKILL.md
 ```
 
-Expected output: 6 SKILL.md files (one for each Tier 1 skill)
+Expected output: 7 SKILL.md files (one for each Tier 1 skill)
